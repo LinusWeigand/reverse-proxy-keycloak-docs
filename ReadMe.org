@@ -1,14 +1,23 @@
-#-*- mode: org -*-
-#+STARTUP: showall
+#+TITLE Using a reverse proxy with Keycloak to authenticate users
+#+PROPERTY: header-args:emacs-lisp :tangle .ecams.d/init.el
 
-* Welcome to Org mode 
+* Preface
 
-  Welcome, and thanks for trying out Org mode. Making outlines in 
-  Org is very simple. It is just text! Just start typing.
-* This is a headling, it starts with one or more stars
-  A heading has one strt, a sub heading two, etc.
-* Working with lists
-** Moving around in our outline
-** Moving around headlines
+The reverse proxy is currently the cutting-edge technolody to authenticate users for Web-Applications and is used by all Tech giants such as Google, Amazon, Microsoft.
+This documetation shows why a reverse proxy is even necessary, the architecture and how to actually implement it with Keycloak.
 
+* Table of contents
+:PROPPERTIES
+:TOC:      :include all :ignore this
+:END:
+:CONTENTS:
+- [[#preface][Preface]]
+- [[#naive-solution][Naive Solution]]
+- [[problems-with-the-naive-solution][Problems with the naive Solution]]
+- [[#Solution-the-reverse-proxy][Solution: The Reverse Proxy]]
+- [[#implementaion][Implementation]]
+  - [[#keycloak][Keycloak]]
+  - [[#reverse-proxy][Reverse Proxy]]
+:END:
 
+* Naive Solution
