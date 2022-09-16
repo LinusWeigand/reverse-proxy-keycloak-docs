@@ -49,25 +49,25 @@ The problem is the inherent security flaws this approach comes with, because the
 Also if the user uses a public computer or a proxy server, the access and the id token can be stolen.
 
 But there's another problem: browsers are not able to store the access and the id token in a secure way.
-There are numerous approaches to cross-site scripting ant thus to hacking into a SPA.
+There are numerous approaches to cross-site scripting ant thus to hacking into the SPA.
 
 * The Solution: Easier And More Secure With Authentication Gateways
 
 As shown in the previous section, the naive solution is not secure and not easy to implement.
 For this reason, an approach was developed: Server-Side OAuth 2.0 and server-side Token handling.
 
-To avoid this server-side logic from bleeding into out server-side APIs, we could encapsulate it in an reusable reverse proxy also called Authentication Gateway:
+To avoid this server-side logic from bleeding into our server-side APIs, we could encapsulate it in an reusable reverse proxy also called Authentication Gateway:
 
 #+CAPTION: The Reverse Proxy Flow
 #+MAME: reverse-proxy
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/reverse_proxy.png]]
 
-The idea is to tunnel are calls from the client through the gateway. This gateway takes care of obtaining and refreshing token and forwarding the tokens to the resource server (the Web API).
+The idea is to tunnel all calls from the client through the gateway. This gateway takes care of obtaining and refreshing tokens and forwarding them to the resource server (the Web API).
 However all tokens remain at the gateway. The browser only gets an HTTP-only cookie that represents the session at the gateway.
 Since this cookie is HTTP-only, an attacker cannot steal it via a JavaScript-based attack.
 
 Since the tokens never end up in the browser, many of the possible attacks do not apply.
-In addition, this approach drstically simplifies the implementation of the frontend, since it no longer has to deal with tokens and the user is now authenticated without any frontend code.
+In addition, this approach drastically simplifies the implementation of the frontend, since it no longer has to deal with tokens and the user is now authenticated without any frontend code.
 
 In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
 
@@ -77,7 +77,7 @@ The client sends a request to the gateway. The gateway checks if it has an valid
 If the gateway has an valid access token, the gateway forwards the request to the Web-Application. 
 If the gateway has no valid access token, the gateway redirects the user to the authentication server.
 
-The user has to login and the authentication server returns an access and an id token to the gateway.
+The user has to login and the authentication server returns an access and id token to the gateway.
 These are then stored in the gateway and the user gets redirected to the Web-Application.
 The Web-Application can now access the user data, reauthenticate and logout via endpoints of the authorization server.
 
@@ -98,7 +98,7 @@ To setup Keycloak with Docker, we first have to install Docker and run the follo
 docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:15.0.2
 #+END_SRC
 
-This will start Keycloak on port 8080 and create an admin user with the username admin and the password admin.
+This will start Keycloak on port 8080 and create an admin user with the username and password set to admin.
 
 *** Setup and installation with a standalone installation
 
@@ -110,11 +110,15 @@ After we have downloaded the server, we have to unzip the file and run the follo
 ./bin/add-user-keycloak.sh -u admin -p admin
 #+END_SRC
 
-This will create an admin user with the username admin and the password admin.
+This will create an admin user with the username and password set to admin.
 
-After we have created the admin user, we have to start the server with the following command:
+To make it easier to start the Keycloak server, we can create an environment variable with the file path to the Keycloak server:
+[[https://www.alphr.com/set-environment-variables-windows-11/][This guide]] shows how to set environment variables on Windows 11.
+Assuming we set the environment variable's name to KC_HOME, we can now start the Keycloak server with the following commands:
+
 
 #+BEGIN_SRC shell
+cd %KC_HOME%
 ./bin/standalone.bat -Djboss.socket.binding.port-offset=100
 #+END_SRC
 
