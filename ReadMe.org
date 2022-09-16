@@ -14,8 +14,8 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 :CONTENTS:
 - [[#preface][Preface]]
 - [[#naive-solution][Naive Solution]]
-- [[problems-with-the-naive-solution][Problems with the naive Solution]]
-- [[#Solution-the-reverse-proxy][Solution: The Reverse Proxy]]
+- [[problems-with-the-naive-solution][Problems With The Naive Solution]]
+- [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier and More Secure With authentication Gateways]]
 - [[#implementaion][Implementation]]
   - [[#keycloak][Keycloak]]
   - [[#reverse-proxy][Reverse Proxy]]
@@ -23,12 +23,42 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 
 * Naive Solution
 
-The naive solution is to implement the authentication in the Web-Application itself. This is the most common way to do it and is also the easiest way to implement it. 
-The Web-Application has to implement the authentication itself and has to store the user data. This is a problem because the Web-Application has to store the user data and has to implement the authentication itself.
+The naive solution is to implement the authentication in the Web-Application itself. 
+The Web-Application has to implement the authentication itself.
+This is a very bad idea, because it is very hard to implement and maintain.
+The solution to this problem is authentication server which is responsible for the authentication and the Web-Application only has to check if the user is authenticated.
 
-#+CAPTION: Naive Solution
+#+CAPTION: The Naive Solution Flow
 #+MAME: naive-solution
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/naive_solution.png]]
+
+The user sends a request to the Web-Application and the Web-Application checks if the user has an valid access token.
+If the user has an valid access token, the Web-Application the page data is send to the browser. 
+If the user has no valid access token, the Web-Application redirects the user to the authentication server.
+The user has to login and the authentication server returns an access and an id token in the URL.
+These are then stored in the browser and the user gets redirected to the Web-Application.
+
+* Problems With The Naive Solution
+
+The problem is the inherent security flaws this approach comes with, because the user can view, copy and manipulate the access and the id token.
+Also if the user uses a public computer or a proxy server, the access and the id token can be stolen.
+But there's another problem: browsers are not able to store the access and the id token in a secure way.
+There are numerous approaches to cross-site scripting ant thus to hacking into a SPA.
+
+The Solution: Easier and More Secure With authentication Gateways
+
+As shown in the previous section, the naive solution is not secure and not easy to implement.
+For this reason, an approach was developed: Server-Side OAuth 2.0 and server-side Token handling.
+
+To avoid this server-side logic from bleeding into out server-side APIs, we could encapsulate it in an reusable reverse proxy also called Authentication Gateway:
+
+#+CAPTION: The Reverse Proxy Flow
+#+MAME: reverse-proxy
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/reverse_proxy.png]]
+
+
+
+
 
 The next approach
 
