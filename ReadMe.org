@@ -131,11 +131,11 @@ To do this, click on the "Add realm" button and enter the name of the realm, e.g
 
 #+CAPTION: Keycloak Home
 #+MAME: keycloak-home
-[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_add_realm.png]]
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_add_realm-fix.png]]
 
 #+CAPTION: Keycloak Home 2
 #+MAME: keycloak-home2
-[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_add_realm2.png]]
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_add_realm2-fix.png]]
 
 After we have created the realm, we have to create a client.
 To do this, click on the "Clients" button and then on the "Create" button.
