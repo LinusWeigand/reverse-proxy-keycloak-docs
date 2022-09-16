@@ -32,9 +32,9 @@ The solution to this problem is authentication server which is responsible for t
 #+MAME: naive-solution
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/naive_solution.png]]
 
-The user sends a request to the Web-Application and the Web-Application checks if the user has an valid access token.
-If the user has an valid access token, the Web-Application the page data is send to the browser. 
-If the user has no valid access token, the Web-Application redirects the user to the authentication server.
+The client sends a request to the Web-Application and the Web-Application checks if the client has an valid access token.
+If the client has an valid access token, the Web-Application the page data is send to the browser. 
+If the client has no valid access token, the Web-Application redirects the user to the authentication server.
 The user has to login and the authentication server returns an access and an id token in the URL.
 These are then stored in the browser and the user gets redirected to the Web-Application.
 
@@ -56,12 +56,14 @@ To avoid this server-side logic from bleeding into out server-side APIs, we coul
 #+MAME: reverse-proxy
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/reverse_proxy.png]]
 
+The idea is to tunnel are calls from the client through the gateway. This gateway takes care of obtaining and refreshing token and forwarding the tokens to the resource server (the Web API).
+However all tokens remain at the gateway. The browser only gets an HTTP-only cookie that represents the session at the gateway.
+Since this cookie is HTTP-only, an attacker cannot steal it via a JavaScript-based attack.
 
+Since the tokens never end up in the browser, many of the possible attacks do not apply.
+In addition, this approach drstically simplifies the implementation of the frontend, since it no longer has to deal with tokens and the user is now authenticated without any frontend code.
 
-
-
-The next approach
-
+In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
 
 
 
