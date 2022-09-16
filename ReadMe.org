@@ -18,10 +18,17 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
   - [[#token-flow-naive-solution][Token Flow Naive Solution]]
 - [[#proxy][Proxy]]
 - [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier And More Secure With Authentication Gateways]]
+  - [[#the-thing-with-csrf-attacks][The Thing With CSRF Attacks]]
   - [[#token-flow-solution][Token Flow Solution]]
 - [[#implementation][Implementation]]
   - [[#keycloak][Keycloak]]
+    - [[#setup-and-installation-with-docker][Setup and installation with Docker]]
+    - [[#setup-and-installation-with-a-standalone-installation][Setup And Installation With A Standalone Installation]]
+    - [[#Configuration-of-keycloak][Configuration Of Keycloak]]
   - [[#reverse-proxy][Reverse Proxy]]
+    - [[#setup-and-installation-of-the-reverse-proxy-with-Docker][Setup And Installation Of The Reverse Proxy With Docker]]
+    - [[#setup-and-installation-of-the-reverse-proxy-with-a-standalone-installation][Setup And Installation Of The Reverse Proxy With A Standalone Installation]]
+    - [[#Configuration-of-the-reverse-proxy][Configuration Of The Revere Proxy]]
 :END: 
 
 * Naive Solution
@@ -96,7 +103,7 @@ In addition, this approach drastically simplifies the implementation of the fron
 
 In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
 
-** The thing with CSRF attacks
+** The Thing With CSRF Attacks
 As a side note, there is still one thing to solve:
 Since we are now working with cookies again, we need to protext ourselves against [[https://en.wikipedia.org/wiki/Cross-site_request_forgery][CSRF attacks]].
 Therefore, the gateway's session cookie should not only be HTTP-only, but also have the [[https://en.wikipedia.org/wiki/SameSite][SameSite]] attribute set to "strict" or "lax".
@@ -126,7 +133,7 @@ We then have to start the Application server and configure the reverse proxy acc
 
 There are two ways to setup Keycloak: either with Docker or with a standalone installation.
 
-*** Setup and installation with Docker
+**** Setup And installation With Docker
 
 To setup Keycloak with Docker, we first have to install Docker and run the following command:
 
@@ -136,7 +143,7 @@ docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.i
 
 This will start Keycloak on port 8080 and create an admin user with the username and password set to admin.
 
-*** Setup and installation with a standalone installation
+**** Setup And Installation With A Standalone Installation
 
 To setup Keycloak with a standalone installation, we first have to download the Keycloak server from the [[https://www.keycloak.org/downloads][official website]].
 
@@ -160,6 +167,8 @@ cd %KC_HOME%
 
 This will start the server on port 8180.
 We do this because the gateway server will be running on port 8080.
+
+**** Configuration of Keycloak
 
 After we have started the server, we have to create a realm and a client.
 
@@ -213,7 +222,7 @@ This will configure the client to use the authorization code flow and to allow t
 Now we have to configure the client scopes. These are used to define which information the gateway will be able to access.
 It is a way of splitting up the user data into multiple scopes, so that the gateway can only access the data it needs.
 
-An example: The gateway only needs the user's name and email address, but not the user's address until The web Application (e.g. A online store) wants to send a physical package to the users home address.
+An example: The gateway only needs the user's name and email address, but not the user's address until the Web Application (e.g. An online store) wants to send a physical package to the users home address.
 In this example the gateway would only have access to the user's name and email address, upon sing-up, but not the user's address, until he buy's something. This is meant by reauthentication earlier.
 
 To do this, click on the "Client Scopes" button and add the following scopes to default and optional:
@@ -274,12 +283,54 @@ To do this, Navigate to the user and click on the "Role Mappings" button and add
 
 The Revere Proxy will be configured to route the requests to Keycloak and the Web-Application.
 
-*** Setup and installation of the Revere Proxy
+*** Setup And Installation Of The Reverse Proxy With Docker
+
+*** Setup And Installation Of The Reverse Proxy With A Standalone Installation
 
 To setup the Revere Proxy, we have clone the repository of the Revere Proxy.
 To do this, run the following commands:
 
 #+BEGIN_SRC shell
+git clone https://github.com/manfredsteyer/yarp-auth-proxy.git
+#+END_SRC
+
+After that enter the directory of the Revere Proxy and install the dependencies.
+
+#+BEGIN_SRC shell
+cd yarp-auth-proxy
+#+END_SRC
+
+If you want to use the Revere Proxy with Docker, you have to run the following command:
+
+#+BEGIN_SRC shell
+docker-compose up
+#+END_SRC
+
+If you want to use the Revere Proxy without Docker, you have to run the following commands:
+
+#+BEGIN_SRC shell
+dotnet restore
+dotnet run conf\appsettings.keycloak.json
+#+END_SRC
+
+*** Configuration Of The Reverse Proxy
+
+To configure the Revere Proxy, we have to edit the file "appsettings.keycloak.json" in the directory "conf".
+This file contains the configuration for the Revere Proxy.
+
+In the "OpenIdConnect" section on line 17, we have to set the following values:
+
+#+BEGIN_SRC json
+  "OpenIdConnect": {
+    "Authority": "http://localhost:8180/auth/realms/myrealm",
+    "ClientId": "gateway",
+    "ClientSecret": "28963003-c9b1-4ad5-8025-fd6cbbd7b10c",
+    "Scopes": "openid profile email offline_access roles"
+  },
+#+END_SRC
+
+
+
 
 
 
