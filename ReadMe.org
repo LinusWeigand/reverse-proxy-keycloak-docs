@@ -76,8 +76,8 @@ Because the destination is not specified by the client but the reverse proxy its
 
 * The Solution: Easier And More Secure With Authentication Gateways
 
-As shown in the previous section, the naive solution is not secure and not easy to implement.
-For this reason, an approach was developed: Server-Side OAuth 2.0 and server-side Token handling.
+As shown in an earlier section, the naive solution is not secure and not easy to implement.
+For this reason, an approach was developed: Server-Side [[https://en.wikipedia.org/wiki/OAuth#OAuth_2.0][OAuth 2.0] and server-side Token handling.
 
 To avoid this server-side logic from bleeding into our server-side APIs, we could encapsulate it in an reusable reverse proxy also called Authentication Gateway:
 
@@ -91,17 +91,21 @@ Since this cookie is HTTP-only, an attacker cannot steal it via a JavaScript-bas
 
 This creates a great abstraction layer between the client and the resource server. The client only needs to know the URL of the gateway, but can reach any resource server behind it.
 
-
-
-
-
-
 Since the tokens never end up in the browser, many of the possible attacks do not apply.
 In addition, this approach drastically simplifies the implementation of the frontend, since it no longer has to deal with tokens and the user is now authenticated without any frontend code.
 
 In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
 
-As a side note: 
+** The thing with CSRF attacks
+As a side note, there is still one thing to solve:
+Since we are now working with cookies again, we need to protext ourselves against [[https://en.wikipedia.org/wiki/Cross-site_request_forgery][CSRF attacks].
+Therefore, the gateway's session cookie should not only be HTTP-only, but also have the [[https://en.wikipedia.org/wiki/SameSite][SameSite] attribute set to "strict" or "lax".
+This prevents the cookie from being sent to the gateway when the user visits a third-party website. 
+This is important because the third-party website could then send a request to the gateway with the user's session cookie and thus impersonate the user.
+
+Unfortunately, SameSite does not mean "Same Origin". In contrast to Origin, the site extends over all subdomains. So there is that a less protected apllication on another subdomain becomes an issue. 
+As I trust that all applications under our domain are secure, I will not go into detail here, but normally we would need to use an XSRF token as well to only allow requests from the same origin.
+
 
 ** Token Flow Solution
 
