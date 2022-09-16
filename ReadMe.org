@@ -26,10 +26,9 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 * Naive Solution
 
 The naive solution is to implement the authentication in the Web-Application itself. 
-The Web-Application has to implement the authentication itself.
 
 This is a very bad idea, because it is very hard to implement and maintain.
-The solution to this problem is authentication server which is responsible for the authentication and the Web-Application only has to check if the user is authenticated.
+The solution to this problem is an authentication server which is responsible for the authentication and the Web-Application only has to check if the user is authenticated.
 
 #+CAPTION: The Naive Solution Flow
 #+MAME: naive-solution
@@ -91,6 +90,8 @@ We then have to start the Application server and configure the reverse proxy acc
 
 There are two ways to setup Keycloak: either with Docker or with a standalone installation.
 
+*** Setup and installation with Docker
+
 To setup Keycloak with Docker, we first have to install Docker and run the following command:
 
 #+BEGIN_SRC shell
@@ -98,6 +99,8 @@ docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.i
 #+END_SRC
 
 This will start Keycloak on port 8080 and create an admin user with the username admin and the password admin.
+
+*** Setup and installation with a standalone installation
 
 To setup Keycloak with a standalone installation, we first have to download the Keycloak server from the [[https://www.keycloak.org/downloads][official website]].
 
@@ -214,6 +217,16 @@ To do this, Navigate to the user and click on the "Role Mappings" button and add
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_configure_user_roles.png]]
 
 ** Revere Proxy
+
+The Revere Proxy will be configured to route the requests to Keycloak and the Web-Application.
+
+*** Setup and installation of the Revere Proxy
+
+To setup the Revere Proxy, we have clone the repository of the Revere Proxy.
+To do this, run the following commands:
+
+#+BEGIN_SRC shell
+
 
 
 
