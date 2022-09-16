@@ -45,7 +45,7 @@ Also if the user uses a public computer or a proxy server, the access and the id
 But there's another problem: browsers are not able to store the access and the id token in a secure way.
 There are numerous approaches to cross-site scripting ant thus to hacking into a SPA.
 
-The Solution: Easier and More Secure With authentication Gateways
+* The Solution: Easier and More Secure With authentication Gateways
 
 As shown in the previous section, the naive solution is not secure and not easy to implement.
 For this reason, an approach was developed: Server-Side OAuth 2.0 and server-side Token handling.
