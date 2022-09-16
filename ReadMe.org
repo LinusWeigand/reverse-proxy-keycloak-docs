@@ -25,9 +25,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 The naive solution is to implement the authentication in the Web-Application itself. This is the most common way to do it and is also the easiest way to implement it. 
 The Web-Application has to implement the authentication itself and has to store the user data. This is a problem because the Web-Application has to store the user data and has to implement the authentication itself.
 
-#+CAPTION: Naive Solution
-#+MAME: naive-solution
-[[./images/naive_solution.png]]
+./images/naive_solution.png
 
 The next approach
 
