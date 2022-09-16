@@ -343,7 +343,6 @@ As well as the "appCluster" section on line 99, assuming the SPA is running on p
           }
         }
       }
-  },
 #+END_SRC
 
 We will setup our SPA in the next section on port 3000.
