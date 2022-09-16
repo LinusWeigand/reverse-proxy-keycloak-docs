@@ -14,7 +14,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 :CONTENTS:
 - [[#preface][Preface]]
 - [[#naive-solution][Naive Solution]]
-- [[problems-with-the-naive-solution][Problems With The Naive Solution]]
+  - [[problems-with-the-naive-solution][Problems With The Naive Solution]]
 - [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier and More Secure With authentication Gateways]]
 - [[#implementaion][Implementation]]
   - [[#keycloak][Keycloak]]
@@ -38,7 +38,7 @@ If the user has no valid access token, the Web-Application redirects the user to
 The user has to login and the authentication server returns an access and an id token in the URL.
 These are then stored in the browser and the user gets redirected to the Web-Application.
 
-* Problems With The Naive Solution
+** Problems With The Naive Solution
 
 The problem is the inherent security flaws this approach comes with, because the user can view, copy and manipulate the access and the id token.
 Also if the user uses a public computer or a proxy server, the access and the id token can be stolen.
