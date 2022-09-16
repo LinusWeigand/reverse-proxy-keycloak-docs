@@ -37,7 +37,7 @@ The solution to this problem is an authentication server which is responsible fo
 ** Token Flow Naive Solution
 
 The client sends a request to the Web-Application and the Web-Application checks if the client has an valid access token.
-If the client has an valid access token, the Web-Application the page data is send to the browser. 
+If the client has an valid access token, the Web-Application page data is send to the browser. 
 If the client has no valid access token, the Web-Application redirects the user to the authentication server.
 
 The user has to login and the authentication server returns an access and an id token in the URL.
