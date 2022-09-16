@@ -98,8 +98,8 @@ In order to initiate (re)authentication or to log off the user, it is sufficient
 
 ** The thing with CSRF attacks
 As a side note, there is still one thing to solve:
-Since we are now working with cookies again, we need to protext ourselves against [[https://en.wikipedia.org/wiki/Cross-site_request_forgery][CSRF attacks].
-Therefore, the gateway's session cookie should not only be HTTP-only, but also have the [[https://en.wikipedia.org/wiki/SameSite][SameSite] attribute set to "strict" or "lax".
+Since we are now working with cookies again, we need to protext ourselves against [[https://en.wikipedia.org/wiki/Cross-site_request_forgery][CSRF attacks]].
+Therefore, the gateway's session cookie should not only be HTTP-only, but also have the [[https://en.wikipedia.org/wiki/SameSite][SameSite]] attribute set to "strict" or "lax".
 This prevents the cookie from being sent to the gateway when the user visits a third-party website. 
 This is important because the third-party website could then send a request to the gateway with the user's session cookie and thus impersonate the user.
 
