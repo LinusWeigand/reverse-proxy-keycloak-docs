@@ -104,10 +104,10 @@ This will start Keycloak on port 8080 and create an admin user with the username
 
 To setup Keycloak with a standalone installation, we first have to download the Keycloak server from the [[https://www.keycloak.org/downloads][official website]].
 
-After we have downloaded the server, we have to unzip the file and run the following command:
+After we have downloaded the server, we have to unzip the file and run the following command in the download directory:
 
 #+BEGIN_SRC shell
-./bin/add-user-keycloak.sh -u admin -p admin
+.\bin\add-user-keycloak.bat -u admin -p admin
 #+END_SRC
 
 This will create an admin user with the username and password set to admin.
@@ -119,7 +119,7 @@ Assuming we set the environment variable's name to KC_HOME, we can now start the
 
 #+BEGIN_SRC shell
 cd %KC_HOME%
-./bin/standalone.bat -Djboss.socket.binding.port-offset=100
+.\bin\standalone.bat -Djboss.socket.binding.port-offset=100
 #+END_SRC
 
 This will start the server on port 8180.
