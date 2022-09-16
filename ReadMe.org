@@ -16,6 +16,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 - [[#naive-solution][Naive Solution]]
   - [[problems-with-the-naive-solution][Problems With The Naive Solution]]
   - [[#token-flow-naive-solution][Token Flow Naive Solution]]
+- [[#proxy][Proxy]]
 - [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier And More Secure With Authentication Gateways]]
   - [[#token-flow-solution][Token Flow Solution]]
 - [[#implementation][Implementation]]
@@ -51,6 +52,28 @@ Also if the user uses a public computer or a proxy server, the access and the id
 But there's another problem: browsers are not able to store the access and the id token in a secure way.
 There are numerous approaches to cross-site scripting ant thus to hacking into the SPA.
 
+* Proxy
+
+Before jumping into the solution, let's take a look at what a proxy actually is because the solution is a kind of reverse proxy hence the name.
+Meaning the direction of the requests is reversed.
+
+A proxy is a server which is between the client and the server.
+The client sends a request to the proxy and the proxy forwards the request to the server.
+The server sends a response to the proxy and the proxy forwards the response to the client.
+
+This can be used to cache the response of the server, to add additional headers or to block requests. 
+Many companies also use proxies to spy on their employees.
+
+The reverse proxy is the other way around.
+
+Instead of forwarding the client request to the server, 
+the reverse proxy handles requests and divides the server resources between all users therefore load balancing all requests. 
+Meaning if one server get too conjecsted, the reverse proxy can redirect the request to another server.
+
+It can also sum up many ressource servers/ Web Applications into one address. 
+Because the destination is not specified by the client but the reverse proxy itself, it is called reversed.
+
+
 * The Solution: Easier And More Secure With Authentication Gateways
 
 As shown in the previous section, the naive solution is not secure and not easy to implement.
@@ -66,10 +89,19 @@ The idea is to tunnel all calls from the client through the gateway. This gatewa
 However all tokens remain at the gateway. The browser only gets an HTTP-only cookie that represents the session at the gateway.
 Since this cookie is HTTP-only, an attacker cannot steal it via a JavaScript-based attack.
 
+This creates a great abstraction layer between the client and the resource server. The client only needs to know the URL of the gateway, but can reach any resource server behind it.
+
+
+
+
+
+
 Since the tokens never end up in the browser, many of the possible attacks do not apply.
 In addition, this approach drastically simplifies the implementation of the frontend, since it no longer has to deal with tokens and the user is now authenticated without any frontend code.
 
 In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
+
+As a side note: 
 
 ** Token Flow Solution
 
