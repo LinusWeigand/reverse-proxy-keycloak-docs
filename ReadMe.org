@@ -123,7 +123,7 @@ cd %KC_HOME%
 #+END_SRC
 
 This will start the server on port 8180.
-We do this because the server will be running on port 8080.
+We do this because the gateway server will be running on port 8080.
 
 After we have started the server, we have to create a realm and a client.
 
