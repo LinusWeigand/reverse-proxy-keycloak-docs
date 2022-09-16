@@ -15,8 +15,10 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 - [[#preface][Preface]]
 - [[#naive-solution][Naive Solution]]
   - [[problems-with-the-naive-solution][Problems With The Naive Solution]]
+  - [[#token-flow][Token Flow]]
 - [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier and More Secure With authentication Gateways]]
-- [[#implementaion][Implementation]]
+  - [[#token-flow][Token Flow]]
+- [[#implementation][Implementation]]
   - [[#keycloak][Keycloak]]
   - [[#reverse-proxy][Reverse Proxy]]
 :END: 
@@ -31,6 +33,8 @@ The solution to this problem is authentication server which is responsible for t
 #+CAPTION: The Naive Solution Flow
 #+MAME: naive-solution
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/naive_solution.png]]
+
+** Token Flow
 
 The client sends a request to the Web-Application and the Web-Application checks if the client has an valid access token.
 If the client has an valid access token, the Web-Application the page data is send to the browser. 
@@ -64,6 +68,10 @@ Since the tokens never end up in the browser, many of the possible attacks do no
 In addition, this approach drstically simplifies the implementation of the frontend, since it no longer has to deal with tokens and the user is now authenticated without any frontend code.
 
 In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
+
+** Token Flow
+
+
 
 
 
