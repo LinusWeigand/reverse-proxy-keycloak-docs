@@ -1,5 +1,6 @@
 #+TITLE: Using a reverse proxy with Keycloak to authenticate users
 #+PROPERTY: header-args:emacs-lisp :tangle .ecams.d/init.el
+#+STARTUP: showall
 
 * Preface
 
