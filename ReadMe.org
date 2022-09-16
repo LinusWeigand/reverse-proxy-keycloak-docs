@@ -27,7 +27,7 @@ The Web-Application has to implement the authentication itself and has to store 
 
 #+CAPTION: Naive Solution
 #+MAME: naive-solution
-[[file:./images/naive_solution.png]]
+[[./images/naive_solution.png]]
 
 The next approach
 
