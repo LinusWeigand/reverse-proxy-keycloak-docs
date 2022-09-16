@@ -134,7 +134,7 @@ To create a realm, open localhost:8180 in a browser and click on the "Administra
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_home.png]]
 
 After we have logged in, we have to create a realm.
-To do this, click on the "Add realm" button and enter the name of the realm, e.g. myrealm.
+To do this, click on the "Add realm" button and enter the name of the realm, e.g. myrealm, then click save.
 
 #+CAPTION: Keycloak Home
 #+MAME: keycloak-home
@@ -144,7 +144,7 @@ To do this, click on the "Add realm" button and enter the name of the realm, e.g
 #+MAME: keycloak-home2
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_add_realm2-fix.png]]
 
-After we have created the realm, we have to create a client.
+After we have created the realm, we have to create a client. This can be thought of the account that the reverse proxy will use to interact with Keycloak.
 To do this, click on the "Clients" button and then on the "Create" button.
 
 #+CAPTION: Keycloak Clients Tab
@@ -169,18 +169,26 @@ To do this, click on the "Settings" button and enter the following values:
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_configure_client.png]]
 
 This will configure the client to use the authorization code flow and to allow the gateway to access the client. 
-The Access Type has to be confidential, because the gateway will be using the client secret to authenticate itself.
-The Valid Redirect URIs and the Web Origins have to be set to the URL of the gateway, because the gateway will be redirecting the user to the authentication server.
 
-Now we have to configure the client scopes.
+- The Access Type has to be confidential, because the gateway will be using the client secret to authenticate itself.
+- The Valid Redirect URIs has to be set to the URL of the gateway, because the gateway will be redirected to this URL after the user has logged in.
+- The Web Origins has to be set to the URL of the gateway, because the gateway and only the gateway alone is permitted to send requests to Keycloak with this client.
+
+Now we have to configure the client scopes. These are used to define which information the gateway will be able to access.
+It is a way of splitting up the user data into multiple scopes, so that the gateway can only access the data it needs.
+
+An example: The gateway only needs the user's name and email address, but not the user's address until The web Application (e.g. A online store) wants to send a physical package to the users home address.
+In this example the gateway would only have access to the user's name and email address, upon sing-up, but not the user's address, until he buy's something. This is meant by reauthentication earlier.
+
 To do this, click on the "Client Scopes" button and add the following scopes to default and optional:
 
 #+CAPTION: Keycloak Client Scopes
 #+MAME: keycloak-client-scopes
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_client_scopes.png]]
 
-After we have configured the client, we have to create a user.
-To do this, click on the "Users" button and then on the "Add user" button.
+After we have configured the client, we have to create a user. This is the actual end-user that wants to do something on the web application.
+In the future, this user will be created by the web application, but for now we will create the user manually.
+To do this, click on the "Users" and then on the "Add User" button.
 
 #+CAPTION: Keycloak Users Tab
 #+MAME: keycloak-users-tab
@@ -194,7 +202,9 @@ Enter the username, Email, first name and last name of the user and click on the
 
 After we have created the user, we have to set a password for the user.
 To do this, click on the "Credentials" button and enter the password of the user.
-Turn on the "Temporary" switch and click on the "Set Password" button.
+Turn off the "Temporary" switch to not needing to change the password, upon sign-in. This would be turned on when the user is a different person then the Keycloak Admin. 
+
+Then click on the "Set Password" button.
 
 #+CAPTION: Keycloak Configure User
 #+MAME: keycloak-configure-user
@@ -202,6 +212,10 @@ Turn on the "Temporary" switch and click on the "Set Password" button.
 
 
 Now we have to create a role for accessing the Web-Application.
+
+These roles are used to define which users have access to which resources.
+The ressources the user can actually access are an intersection between the user's roles and the client's roles (in our case the client would be the gateway). 
+
 To do this, click on the "Roles" button and then on the "Add Role" button.
 Enter "myrole" as the name of the role and click on the "Save" button.
 
