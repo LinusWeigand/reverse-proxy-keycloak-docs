@@ -28,7 +28,7 @@ The Web-Application has to implement the authentication itself and has to store 
 
 #+CAPTION: Naive Solution
 #+MAME: naive-solution
-[[./images/naive_solution.png][Naive Solution]]
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/naive_solution.png][Naive Solution]]
 
 The next approach
 
