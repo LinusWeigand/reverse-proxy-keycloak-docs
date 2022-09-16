@@ -15,7 +15,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 - [[#preface][Preface]]
 - [[#naive-solution][Naive Solution]]
   - [[problems-with-the-naive-solution][Problems With The Naive Solution]]
-  - [[#token-flow][Token Flow]]
+  - [[#lol][Token Flow]]
 - [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier and More Secure With authentication Gateways]]
   - [[#token-flow2][Token Flow]]
 - [[#implementation][Implementation]]
