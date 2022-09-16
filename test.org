@@ -36,6 +36,8 @@ svgz
 
 [[https://raw.githubusercontent.com/misohena/org-cmenu/main/screenshot/org-cmenu-pretty.png]]
 
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/naive_solution.png][Naive Solution]]
+
 ** Description Part
 
 #+begin_src org
