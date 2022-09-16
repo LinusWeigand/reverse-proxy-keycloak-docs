@@ -74,6 +74,7 @@ In order to initiate (re)authentication or to log off the user, it is sufficient
 The client sends a request to the gateway. The gateway checks if it has an valid access token belonging to the user. This is done by checking the HTTP-only cookie. 
 If the gateway has an valid access token, the gateway forwards the request to the Web-Application. 
 If the gateway has no valid access token, the gateway redirects the user to the authentication server.
+
 The user has to login and the authentication server returns an access and an id token to the gateway.
 These are then stored in the gateway and the user gets redirected to the Web-Application.
 The Web-Application can now access the user data, reauthenticate and logout via endpoints of the authorization server.
