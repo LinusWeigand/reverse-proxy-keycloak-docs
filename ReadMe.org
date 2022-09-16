@@ -32,8 +32,6 @@ The Web-Application has to implement the authentication itself and has to store 
 
 The next approach
 
-https://github.com/LinusWeigand/emacs-org-mode-test/blob/main/images/naive_solution.png (richtig)
-https://github.com/LinusWeigand/emacs-org-mode-test/blob/main/images/naive-solution.png (falsch)
 
 
 
