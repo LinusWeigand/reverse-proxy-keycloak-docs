@@ -15,7 +15,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 - [[#preface][Preface]]
 - [[#naive-solution][Naive Solution]]
   - [[problems-with-the-naive-solution][Problems With The Naive Solution]]
-  - [[#lol][Token Flow]]
+  - [[#token-flow][Token Flow]]
 - [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier and More Secure With authentication Gateways]]
   - [[#token-flow2][Token Flow]]
 - [[#implementation][Implementation]]
@@ -69,6 +69,7 @@ In addition, this approach drstically simplifies the implementation of the front
 
 In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
 
+#+NAME: token-flow2
 ** Token Flow
 
 
