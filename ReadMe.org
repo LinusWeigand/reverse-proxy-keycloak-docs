@@ -33,6 +33,8 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
     - [[#setup-and-installation-of-the-web-application-with-Docker][Setup And Installation Of The Web Application With Docker]]
     - [[#setup-and-installation-of-the-web-application-with-a-standalone-installation][Setup And Installation Of The Web Application With A Standalone Installation]]
     - [[#Configuration-of-the-web-application][Configuration Of The Web Application]]
+      - [[#react][React]]
+      - [[#angular][Angular]]
 :END: 
 
 * Naive Solution
@@ -394,6 +396,36 @@ If not you can run the application on port 3000 by changing the port of the star
 #+END_SRC
 
 *** Configuration Of The Web Application
+
+First we will look how to redirect to the keycloak endpoints in react
+
+**** React
+
+Anywhere in your application you can use the following functions to redirect to the keycloak endpoints:
+
+#+BEGIN_SRC javascript
+const onLogin = () => {
+    window.location.href = '/login';
+  }
+
+  const onLogout = () => {
+    window.location.href = '/logout';
+  }
+
+  const loadUserInfo = async () => {
+    const response = await fetch('/userinfo');
+    const data = await response.json();
+    return data;
+  }
+#+END_SRC
+
+The function "onLogin" redirects to the login endpoint of the keycloak server.
+The function "onLogout" redirects to the logout endpoint of the keycloak server.
+The function "loadUserInfo" retrieves the user information from the userinfo endpoint of the keycloak server.
+
+**** Angular
+
+
 
 
 
