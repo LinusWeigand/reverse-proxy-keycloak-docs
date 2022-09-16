@@ -97,6 +97,75 @@ To setup Keycloak with Docker, we first have to install Docker and run the follo
 docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:15.0.2
 #+END_SRC
 
+This will start Keycloak on port 8080 and create an admin user with the username admin and the password admin.
+
+To setup Keycloak with a standalone installation, we first have to download the Keycloak server from the [[https://www.keycloak.org/downloads][official website]].
+
+After we have downloaded the server, we have to unzip the file and run the following command:
+
+#+BEGIN_SRC shell
+./bin/add-user-keycloak.sh -u admin -p admin
+#+END_SRC
+
+This will create an admin user with the username admin and the password admin.
+
+After we have created the admin user, we have to start the server with the following command:
+
+#+BEGIN_SRC shell
+./bin/standalone.bat -Djboss.socket.binding.port-offset=100
+#+END_SRC
+
+This will start the server on port 8180.
+We do this because the server will be running on port 8080.
+
+After we have started the server, we have to create a realm and a client.
+
+To create a realm, open localhost:8180 in a browser and click on the "Administration Console" button and login with the admin user.
+
+#+CAPTION: Keycloak Home
+#+MAME: keycloak-home
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_home.png]]
+
+After we have logged in, we have to create a realm.
+To do this, click on the "Add realm" button and enter the name of the realm, e.g. myrealm.
+
+#+CAPTION: Keycloak Home
+#+MAME: keycloak-home
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_add_realm.png]]
+
+#+CAPTION: Keycloak Home 2
+#+MAME: keycloak-home2
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_add_realm2.png]]
+
+After we have created the realm, we have to create a client.
+To do this, click on the "Clients" button and then on the "Create" button.
+
+#+CAPTION: Keycloak Clients Tab
+#+MAME: keycloak-clients-tab
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_clients_tab.png]]
+
+#+CAPTION: Keycloak Create Client
+#+MAME: keycloak-create-client
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_create_client.png]]
+
+Enter "gateway" as the name of the client and click on the "Save" button.
+
+After we have created the client, we have to configure the client.
+To do this, click on the "Settings" button and enter the following values:
+
+- Access Type: confidential
+- Valid Redirect URIs: http://localhost:8080/*
+- Web Origins: http://localhost:8080
+
+#+CAPTION: Keycloak Configure Client
+#+MAME: keycloak-configure-client
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_configure_client.png]]
+
+This will configure the client to use the authorization code flow and to allow the gateway to access the client. 
+The a
+
+
+
 
 
 
