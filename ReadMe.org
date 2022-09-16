@@ -17,7 +17,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
   - [[problems-with-the-naive-solution][Problems With The Naive Solution]]
   - [[#token-flow][Token Flow]]
 - [[#the-soultion-easier-and-more-secure-with-the-naive-solution][The Solution: Easier and More Secure With authentication Gateways]]
-  - [[#token-flow][Token Flow]]
+  - [[#token-flow2][Token Flow]]
 - [[#implementation][Implementation]]
   - [[#keycloak][Keycloak]]
   - [[#reverse-proxy][Reverse Proxy]]
