@@ -18,7 +18,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 - [[#Solution-the-reverse-proxy][Solution: The Reverse Proxy]]
 - [[#implementaion][Implementation]]
   - [[#keycloak][Keycloak]]
-  - [[#reverse-proxy][Reverse]]
+  - [[#reverse-proxy][Reverse Proxy]]
 :END: 
 
 * Naive Solution
