@@ -29,6 +29,10 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
     - [[#setup-and-installation-of-the-reverse-proxy-with-Docker][Setup And Installation Of The Reverse Proxy With Docker]]
     - [[#setup-and-installation-of-the-reverse-proxy-with-a-standalone-installation][Setup And Installation Of The Reverse Proxy With A Standalone Installation]]
     - [[#Configuration-of-the-reverse-proxy][Configuration Of The Revere Proxy]]
+- [[#web-application][Web Applications]]
+  - [[#setup-and-installation-of-the-web-application-with-Docker][Setup And Installation Of The Web Application With Docker]]
+  - [[#setup-and-installation-of-the-web-application-with-a-standalone-installation][Setup And Installation Of The Web Application With A Standalone Installation]]
+  - [[#Configuration-of-the-web-application][Configuration Of The Web Application]]
 :END: 
 
 * Naive Solution
@@ -101,7 +105,7 @@ This creates a great abstraction layer between the client and the resource serve
 Since the tokens never end up in the browser, many of the possible attacks do not apply.
 In addition, this approach drastically simplifies the implementation of the frontend, since it no longer has to deal with tokens and the user is now authenticated without any frontend code.
 
-In order to initiate (re)authentication or to log off the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple gateway service.
+In order to initiate (re)authentication or to log-out the user, it is sufficient to be forwarded to a URL provided by the gateway. The front end can obtain information about the current user via a simple Keycloak endpoint.
 
 ** The Thing With CSRF Attacks
 As a side note, there is still one thing to solve:
@@ -324,10 +328,77 @@ In the "OpenIdConnect" section on line 17, we have to set the following values:
   "OpenIdConnect": {
     "Authority": "http://localhost:8180/auth/realms/myrealm",
     "ClientId": "gateway",
-    "ClientSecret": "28963003-c9b1-4ad5-8025-fd6cbbd7b10c",
+    "ClientSecret": "<your client secret>",
     "Scopes": "openid profile email offline_access roles"
   },
 #+END_SRC
+
+As well as the "appCluster" section on line 99, assuming the SPA is running on port 3000:
+
+#+BEGIN_SRC json
+  "appCluster": {
+        "Destinations": {
+          "destination1": {
+            "Address": "http://localhost:3000"
+          }
+        }
+      }
+  },
+#+END_SRC
+
+We will setup our SPA in the next section on port 3000.
+
+In place of "<your client secret>", we have to enter the client secret of the client "gateway" from the Keycloak Admin.
+To do this, navigate to the client "gateway" and click on the "Credentials" button.
+Then copy the value of the "Secret" field.
+
+#+CAPTION: Keycloak Client Credentials
+#+MAME: keycloak-client-credentials
+[[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_client_credentials.png]]
+
+** Web Application
+
+The Web Application will be configured to use redirect to Keycloak in case of a reauthentication or log-out. 
+It will also retrieve the user information from Keycloak endpoint.
+
+*** Setup And Installation Of The Web Application With Docker
+
+*** Setup And Installation Of The Web Application With A Standalone Installation
+
+To setup the Web Application, we have clone the repository of the Web Application.
+To do this, run the following commands:
+
+#+BEGIN_SRC shell
+git clone https://github.com/LinusWeigand/ethscan-react.git
+#+END_SRC
+
+After that enter the directory of the Web Application and install the dependencies.
+
+#+BEGIN_SRC shell
+cd ethscan-react
+npm install
+#+END_SRC
+
+Then start the application by running the following command:
+
+#+BEGIN_SRC shell
+npm start
+#+END_SRC
+
+It should automatically run on port 3000.
+If not you can run the application on port 3000 by changing the port of the start command in the file "package.json":
+
+#+BEGIN_SRC json
+  "scripts": {
+    "start": "PORT=3000 react-scripts start",
+  },
+#+END_SRC
+
+*** Configuration Of The Web Application
+
+
+
+
 
 
 
