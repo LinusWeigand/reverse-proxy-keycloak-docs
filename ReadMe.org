@@ -27,6 +27,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
 
 The naive solution is to implement the authentication in the Web-Application itself. 
 The Web-Application has to implement the authentication itself.
+
 This is a very bad idea, because it is very hard to implement and maintain.
 The solution to this problem is authentication server which is responsible for the authentication and the Web-Application only has to check if the user is authenticated.
 
@@ -39,6 +40,7 @@ The solution to this problem is authentication server which is responsible for t
 The client sends a request to the Web-Application and the Web-Application checks if the client has an valid access token.
 If the client has an valid access token, the Web-Application the page data is send to the browser. 
 If the client has no valid access token, the Web-Application redirects the user to the authentication server.
+
 The user has to login and the authentication server returns an access and an id token in the URL.
 These are then stored in the browser and the user gets redirected to the Web-Application.
 
@@ -46,6 +48,7 @@ These are then stored in the browser and the user gets redirected to the Web-App
 
 The problem is the inherent security flaws this approach comes with, because the user can view, copy and manipulate the access and the id token.
 Also if the user uses a public computer or a proxy server, the access and the id token can be stolen.
+
 But there's another problem: browsers are not able to store the access and the id token in a secure way.
 There are numerous approaches to cross-site scripting ant thus to hacking into a SPA.
 
@@ -78,6 +81,22 @@ If the gateway has no valid access token, the gateway redirects the user to the 
 The user has to login and the authentication server returns an access and an id token to the gateway.
 These are then stored in the gateway and the user gets redirected to the Web-Application.
 The Web-Application can now access the user data, reauthenticate and logout via endpoints of the authorization server.
+
+* Implementation
+
+To implement this architecture we first have to setup the authentication server with Keycloak and get it running.
+We then have to start the Application server and configure the reverse proxy accordingly.
+
+** Keycloak
+
+There are two ways to setup Keycloak: either with Docker or with a standalone installation.
+
+To setup Keycloak with Docker, we first have to install Docker and run the following command:
+
+#+BEGIN_SRC shell
+docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:15.0.2
+#+END_SRC
+
 
 
 
