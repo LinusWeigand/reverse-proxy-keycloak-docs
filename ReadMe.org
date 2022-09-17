@@ -35,6 +35,11 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
     - [[#Configuration-of-the-web-application][Configuration Of The Web Application]]
       - [[#react][React]]
       - [[#angular][Angular]]
+- [[#conclusion][Conclusion]]
+  - [[#summary][summary]]
+  - [[#further-reading][Further Reading]]
+  
+
 :END: 
 
 * Naive Solution
@@ -424,6 +429,21 @@ The function "onLogout" redirects to the logout endpoint of the keycloak server.
 The function "loadUserInfo" retrieves the user information from the userinfo endpoint of the keycloak server.
 
 **** Angular
+
+* Conclusion
+
+** Summary
+
+In this article, we learned why the naive approach of using tokens in the browser is not secure and hard to implement and maintain.
+We learned how to setup Keycloak as an Identity Provider and how to configure the Revere Proxy to route the requests to Keycloak and the Web-Application.
+We also learned how to configure the Web Application to redirect to Keycloak in case of a reauthentication or log-out and how to retrieve the user information from Keycloak endpoint.
+
+** Further Reading
+
+* [[https://www.keycloak.org/][Keycloak]]
+* [[https://github.com/manfredsteyer/yarp-auth-proxy][Revere Proxy]]
+* [[https://github.com/LinusWeigand/btc-mining-tax-calculator][Web Application]]
+
 
 
 
