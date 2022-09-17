@@ -7,7 +7,7 @@
 The reverse proxy is currently the cutting-edge technolody to authenticate users for Web-Applications and is used by all Tech giants such as Google, Amazon, Microsoft.
 This documetation shows why a reverse proxy is even necessary, the architecture and how to actually implement it with Keycloak.
 
-* Table of contents
+* Table Of Contents
 :PROPPERTIES:
 :TOC:      :include all :ignore this
 :END:
