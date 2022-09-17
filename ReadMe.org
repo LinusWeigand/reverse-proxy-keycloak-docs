@@ -29,7 +29,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
     - [[#setup-and-installation-of-the-reverse-proxy-with-Docker][Setup And Installation Of The Reverse Proxy With Docker]]
     - [[#setup-and-installation-of-the-reverse-proxy-with-a-standalone-installation][Setup And Installation Of The Reverse Proxy With A Standalone Installation]]
     - [[#Configuration-of-the-reverse-proxy][Configuration Of The Revere Proxy]]
-  - [[#web-application][Web Applications]]
+  - [[#web-application][Web Application]]
     - [[#setup-and-installation-of-the-web-application-with-Docker][Setup And Installation Of The Web Application With Docker]]
     - [[#setup-and-installation-of-the-web-application-with-a-standalone-installation][Setup And Installation Of The Web Application With A Standalone Installation]]
     - [[#Configuration-of-the-web-application][Configuration Of The Web Application]]
