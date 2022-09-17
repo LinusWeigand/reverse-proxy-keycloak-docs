@@ -22,7 +22,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
   - [[#token-flow-solution][Token Flow Solution]]
 - [[#implementation][Implementation]]
   - [[#keycloak][Keycloak]]
-    - [[#setup-and-installation-with-docker][Setup and installation with Docker]]
+    - [[#setup-and-installation-With-docker][Setup and installation with Docker]]
     - [[#setup-and-installation-with-a-standalone-installation][Setup And Installation With A Standalone Installation]]
     - [[#Configuration-of-keycloak][Configuration Of Keycloak]]
   - [[#reverse-proxy][Reverse Proxy]]
@@ -36,7 +36,7 @@ This documetation shows why a reverse proxy is even necessary, the architecture 
       - [[#react][React]]
       - [[#angular][Angular]]
 - [[#conclusion][Conclusion]]
-  - [[#summary][summary]]
+  - [[#summary][Summary]]
   - [[#further-reading][Further Reading]]
   
 
