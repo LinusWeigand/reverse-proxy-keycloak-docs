@@ -290,7 +290,7 @@ To do this, Navigate to the user and click on the "Role Mappings" button and add
 #+MAME: keycloak-configure-user-roles
 [[https://raw.githubusercontent.com/LinusWeigand/emacs-org-mode-test/main/.github/images/keycloak_admin_configure_user_roles.png]]
 
-** Revere Proxy
+** Reverse Proxy
 
 The Revere Proxy will be configured to route the requests to Keycloak and the Web-Application.
 
