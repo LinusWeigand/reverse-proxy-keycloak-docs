@@ -111,12 +111,12 @@ In order to initiate (re)authentication or to log-out the user, it is sufficient
 
 ** The Thing With CSRF Attacks
 As a side note, there is still one thing to solve:
-Since we are now working with cookies again, we need to protext ourselves against [[https://en.wikipedia.org/wiki/Cross-site_request_forgery][CSRF attacks]].
+Since we are now working with cookies again, we need to protect ourselves against [[https://en.wikipedia.org/wiki/Cross-site_request_forgery][CSRF attacks]].
 Therefore, the gateway's session cookie should not only be HTTP-only, but also have the [[https://en.wikipedia.org/wiki/SameSite][SameSite]] attribute set to "strict" or "lax".
 This prevents the cookie from being sent to the gateway when the user visits a third-party website. 
 This is important because the third-party website could then send a request to the gateway with the user's session cookie and thus impersonate the user.
 
-Unfortunately, SameSite does not mean "Same Origin". In contrast to Origin, the site extends over all subdomains. So there is that a less protected apllication on another subdomain becomes an issue. 
+Unfortunately, SameSite does not mean "Same Origin". In contrast to Origin, the site extends over all subdomains. So if there is a less protected application on another subdomain this becomes an issue. 
 As I trust that all applications under our domain are secure, I will not go into detail here, but normally we would need to use an XSRF token as well to only allow requests from the same origin.
 
 
