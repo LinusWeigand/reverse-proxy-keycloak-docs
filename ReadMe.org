@@ -440,9 +440,9 @@ We also learned how to configure the Web Application to redirect to Keycloak in 
 
 ** Further Reading
 
-* [[https://www.keycloak.org/][Keycloak]]
-* [[https://github.com/manfredsteyer/yarp-auth-proxy][Revere Proxy]]
-* [[https://github.com/LinusWeigand/btc-mining-tax-calculator][Web Application]]
+- [[https://www.keycloak.org/][Keycloak]]
+- [[https://github.com/manfredsteyer/yarp-auth-proxy][Revere Proxy]]
+- [[https://github.com/LinusWeigand/btc-mining-tax-calculator][Web Application]]
 
 
 
