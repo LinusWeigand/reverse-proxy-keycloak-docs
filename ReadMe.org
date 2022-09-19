@@ -296,6 +296,30 @@ The Revere Proxy will be configured to route the requests to Keycloak and the We
 
 *** Setup And Installation Of The Reverse Proxy With Docker
 
+To setup the reverse proxy, we will use the docker image of the reverse proxy.
+
+Run the following command in the projects directory:
+
+#+BEGIN_SRC shell
+docker compose up
+#+END_SRC
+
+Check the =docker-compose.yml= file if the following is set:
+
+#+BEGIN_SRC yaml
+version: "3.9"
+services:
+  gateway:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./conf:/app/conf
+    environment:
+      - GATEWAY_CONFIG=conf/appsettings.keycloak.json
+      - Logging__Console__FormatterName=Simple
+#+END_SRC
+
 *** Setup And Installation Of The Reverse Proxy With A Standalone Installation
 
 To setup the Revere Proxy, we have clone the repository of the Revere Proxy.
