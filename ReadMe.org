@@ -369,6 +369,28 @@ It will also retrieve the user information from Keycloak endpoint.
 
 *** Setup And Installation Of The Web Application With Docker
 
+To setup the Web Application, we have to clone the repository of the Web Application.
+To do this, run the following commands:
+
+#+BEGIN_SRC shell
+git clone https://github.com/LinusWeigand/ethscan-react.git
+#+END_SRC
+
+After that enter the directory of the Web Application and install the dependencies.
+
+#+BEGIN_SRC shell
+cd ethscan-react
+npm install
+#+END_SRC
+
+If you want to use the Web Application with Docker, you have to run the following command:
+
+#+BEGIN_SRC shell
+docker-compose up
+#+END_SRC
+
+
+
 *** Setup And Installation Of The Web Application With A Standalone Installation
 
 To setup the Web Application, we have clone the repository of the Web Application.
